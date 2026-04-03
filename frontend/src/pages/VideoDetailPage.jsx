@@ -85,7 +85,7 @@ const VideoDetailPage = () => {
               <Home className="h-6 w-6" />
             </Button>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
-              Agentic Market Place for Insurance Use Cases
+              Agentic AI Market Place for Insurance
             </h1>
           </div>
           <UserDropdown />
@@ -122,9 +122,6 @@ const VideoDetailPage = () => {
                 <Badge variant="outline">
                   {lobNames[video.line_of_business] || video.line_of_business}
                 </Badge>
-                {video.duration && (
-                  <span className="text-sm text-gray-600">Duration: {video.duration}</span>
-                )}
               </div>
 
               {/* Placeholder Video Player */}
@@ -151,28 +148,27 @@ const VideoDetailPage = () => {
                   
                   {/* Buttons */}
                   <div className="flex gap-4">
-                    <Button
-                      onClick={handleOpenVideo}
-                      className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-6 text-lg font-semibold shadow-lg"
-                      data-testid="open-video-btn"
-                    >
-                      <ExternalLink className="h-5 w-5 mr-2" />
-                      Open Video
-                    </Button>
-                    
                     {video.workflow_demo_url && (
                       <Button
                         onClick={handleOpenWorkflowDemo}
                         variant="outline"
                         className="border-purple-600 text-purple-600 hover:bg-purple-50 px-8 py-6 text-lg font-semibold shadow-lg"
-                        data-testid="workflow-demo-btn"
+                        data-testid="use-cases-btn"
                       >
                         <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
-                        Workflow Demo
+                        Use cases
                       </Button>
                     )}
+                    <Button
+                      onClick={handleOpenVideo}
+                      className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white px-8 py-6 text-lg font-semibold shadow-lg"
+                      data-testid="demo-btn"
+                    >
+                      <ExternalLink className="h-5 w-5 mr-2" />
+                      Demo
+                    </Button>
                   </div>
                   
                   {/* Notice */}
@@ -181,7 +177,7 @@ const VideoDetailPage = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
                     <span className="text-sm font-medium">
-                      Opens in Accenture Media Exchange - requires corporate login
+                      Opens in external media player
                     </span>
                   </div>
                 </div>
@@ -211,7 +207,7 @@ const VideoDetailPage = () => {
             )}
           </div>
 
-          {/* Right Column - Who's it for */}
+          {/* Right Column - Designed for */}
           <div className="lg:col-span-1">
             {video.target_companies && video.company_logos && (() => {
               // Filter to show only companies that have logos
@@ -226,7 +222,7 @@ const VideoDetailPage = () => {
                 <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
                   <div className="flex items-center gap-2 mb-6">
                     <Building2 className="h-6 w-6 text-purple-600" />
-                    <h3 className="text-2xl font-bold text-gray-800">Who's it for</h3>
+                    <h3 className="text-2xl font-bold text-gray-800">Designed for</h3>
                   </div>
                   <div className="space-y-4">
                     {companiesWithLogos.map((item, index) => (

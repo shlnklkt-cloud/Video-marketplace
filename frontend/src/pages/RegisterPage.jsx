@@ -62,7 +62,7 @@ const RegisterPage = () => {
         <div className="backdrop-blur-3xl bg-white/70 rounded-2xl shadow-2xl p-8 border border-white/20">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-400 bg-clip-text text-transparent mb-2">
-              Agentic Market Place for Insurance Use Cases
+              Agentic AI Market Place for Insurance
             </h1>
             <h2 className="text-2xl font-semibold text-gray-800 mb-1">Welcome</h2>
             <p className="text-gray-600">Create your account to get started</p>

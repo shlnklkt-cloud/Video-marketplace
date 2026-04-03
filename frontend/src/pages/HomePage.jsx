@@ -10,7 +10,6 @@ const HomePage = () => {
     { icon: Users, label: '30 Super Agents' },
     { icon: Zap, label: '65 Utility Agents' },
     { icon: Sparkles, label: '135 Gen AI Patterns, Prompts & Workflows' },
-    { icon: Award, label: "Accenture's Specialized Language Model for AMS" },
     { icon: TrendingUp, label: '25-65% Efficiency Gains by Activity' },
     { icon: Target, label: '30% Faster Releases' },
     { icon: Award, label: '40-50% Improvement in Software Quality' },
@@ -41,14 +40,13 @@ const HomePage = () => {
       <div className="container mx-auto px-6 py-20">
         <div className="text-center space-y-8 max-w-4xl mx-auto">
           <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-400 bg-clip-text text-transparent" data-testid="hero-title">
-            Agentic Market Place for Insurance Use Cases
+            Agentic AI Market Place for Insurance
           </h1>
           <p className="text-3xl text-gray-700 font-semibold">
-            for Technology Delivery Lifecycle
+            for business Use Cases
           </p>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Your one stop shop to explore, contribute, test and use our agents, usecases, prompts,
-            Specialized Language Models (SLMs) and GenAI Assets.
+            Your one stop shop to explore and contribute to agentic use cases and GenAI Assets.
           </p>
 
           <div className="flex items-center justify-center gap-6 pt-8">
@@ -60,15 +58,6 @@ const HomePage = () => {
             >
               <Sparkles className="h-5 w-5 mr-2" />
               Explore Now
-            </Button>
-            <Button
-              onClick={() => navigate('/catalogue')}
-              variant="outline"
-              size="lg"
-              className="border-purple-600 text-purple-600 hover:bg-purple-50 font-semibold px-8 py-6 text-lg"
-              data-testid="my-portfolio-btn"
-            >
-              My Portfolio
             </Button>
           </div>
         </div>

@@ -44,11 +44,6 @@ const VideoCard = ({ video }) => {
             <Tag className="h-4 w-4" />
             <span>{lobNames[video.line_of_business] || video.line_of_business}</span>
           </div>
-          {video.duration && (
-            <div className="text-sm text-gray-400">
-              Duration: {video.duration}
-            </div>
-          )}
         </div>
       </div>
     </div>

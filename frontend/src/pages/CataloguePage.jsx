@@ -174,7 +174,7 @@ const CataloguePage = () => {
               <Home className="h-6 w-6" />
             </Button>
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-400 bg-clip-text text-transparent">
-              Agentic Market Place for Insurance Use Cases
+              Agentic AI Market Place for Insurance
             </h1>
           </div>
           <UserDropdown />
@@ -313,11 +313,6 @@ const CataloguePage = () => {
             <p className="text-gray-600">
               <span className="font-semibold">{filteredVideos.length}</span> assets found
             </p>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <p className="text-sm text-blue-900">
-                <strong>Note:</strong> Videos are hosted on Accenture Media Exchange. Sign in with your corporate account when prompted.
-              </p>
-            </div>
           </div>
 
           {/* Video Grid */}

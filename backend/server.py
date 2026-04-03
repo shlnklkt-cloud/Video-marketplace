@@ -517,8 +517,8 @@ async def seed_data():
     videos = [
         {
             "id": str(uuid.uuid4()),
-            "title": "Loss Run Ingestion",
-            "description": "Learn about loss run ingestion processes for broker operations",
+            "title": "SOV Manager",
+            "description": "Learn about SOV management processes for broker operations",
             "video_url": "https://mediaexchange.accenture.com/embed/secure/iframe/entryId/1_c0rn3vk3/uiConfId/54057682/st/0",
             "thumbnail_url": None,
             "duration": "10:30",
