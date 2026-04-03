@@ -537,7 +537,7 @@ async def seed_data():
                 None,
                 None
             ],
-            "workflow_demo_url": "https://customer-assets.emergentagent.com/job_ai-marketplace-demo/artifacts/0sjj7oqw_image.png",
+            "workflow_demo_url": "https://customer-assets.emergentagent.com/job_determined-cori-5/artifacts/w3nlrf8l_image.png",
             "created_at": datetime.now(timezone.utc).isoformat()
         },
         {

@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Search, X, ArrowUpDown, Building2 } from 'lucide-react';
+import { Home, X, ArrowUpDown, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -362,13 +362,16 @@ const CataloguePage = () => {
           {/* Search and Sort Bar */}
           <div className="mb-6 flex gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <span className="text-[#A100FF] font-bold text-xl">&gt;</span>
+                <span className="text-gray-800 font-semibold text-sm tracking-wide">accenture</span>
+              </div>
               <Input
                 type="text"
-                placeholder="Search videos by name..."
+                placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-white"
+                className="pl-28 bg-white"
                 data-testid="search-input"
               />
             </div>
