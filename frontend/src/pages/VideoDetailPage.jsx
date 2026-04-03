@@ -209,45 +209,65 @@ const VideoDetailPage = () => {
 
           {/* Right Column - Designed for */}
           <div className="lg:col-span-1">
-            {video.target_companies && video.company_logos && (() => {
-              // Filter to show only companies that have logos
-              const companiesWithLogos = video.target_companies
-                .map((company, index) => ({
-                  name: company,
-                  logo: video.company_logos[index]
-                }))
-                .filter(item => item.logo && item.logo !== null);
-              
-              return companiesWithLogos.length > 0 && (
-                <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
-                  <div className="flex items-center gap-2 mb-6">
-                    <Building2 className="h-6 w-6 text-purple-600" />
-                    <h3 className="text-2xl font-bold text-gray-800">Designed for</h3>
-                  </div>
-                  <div className="space-y-4">
-                    {companiesWithLogos.map((item, index) => (
-                      <div
-                        key={index}
-                        className="border border-gray-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-md transition-all duration-200 bg-white"
-                      >
-                        <div className="flex items-center justify-center h-20">
-                          <img
-                            src={item.logo}
-                            alt={item.name}
-                            className="max-h-16 max-w-full object-contain"
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
-                    <p className="text-sm text-gray-600">
-                      This solution is designed for insurance companies and organizations looking to modernize their operations.
-                    </p>
-                  </div>
+            {video.title === 'SOV Manager' ? (
+              // Special case for SOV Manager - show text instead of logos
+              <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                <div className="flex items-center gap-2 mb-6">
+                  <Building2 className="h-6 w-6 text-purple-600" />
+                  <h3 className="text-2xl font-bold text-gray-800">Designed for</h3>
                 </div>
-              );
-            })()}
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6">
+                  <p className="text-xl font-semibold text-gray-800 text-center">
+                    For all Commercial Brokers & Carriers
+                  </p>
+                </div>
+                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                  <p className="text-sm text-gray-600">
+                    This solution is designed for insurance companies and organizations looking to modernize their operations.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              video.target_companies && video.company_logos && (() => {
+                // Filter to show only companies that have logos
+                const companiesWithLogos = video.target_companies
+                  .map((company, index) => ({
+                    name: company,
+                    logo: video.company_logos[index]
+                  }))
+                  .filter(item => item.logo && item.logo !== null);
+                
+                return companiesWithLogos.length > 0 && (
+                  <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                    <div className="flex items-center gap-2 mb-6">
+                      <Building2 className="h-6 w-6 text-purple-600" />
+                      <h3 className="text-2xl font-bold text-gray-800">Designed for</h3>
+                    </div>
+                    <div className="space-y-4">
+                      {companiesWithLogos.map((item, index) => (
+                        <div
+                          key={index}
+                          className="border border-gray-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-md transition-all duration-200 bg-white"
+                        >
+                          <div className="flex items-center justify-center h-20">
+                            <img
+                              src={item.logo}
+                              alt={item.name}
+                              className="max-h-16 max-w-full object-contain"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                      <p className="text-sm text-gray-600">
+                        This solution is designed for insurance companies and organizations looking to modernize their operations.
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()
+            )}
           </div>
         </div>
       </div>

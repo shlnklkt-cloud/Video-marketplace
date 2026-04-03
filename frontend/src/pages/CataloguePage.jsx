@@ -101,6 +101,9 @@ const CataloguePage = () => {
     // Apply client filter
     if (selectedClients.length > 0) {
       filtered = filtered.filter((video) => {
+        // SOV Manager should appear for all client filters
+        if (video.title === 'SOV Manager') return true;
+        
         if (!video.target_companies) return false;
         return selectedClients.some((client) => 
           video.target_companies.includes(client)
@@ -237,8 +240,8 @@ const CataloguePage = () => {
 
       <div className="container mx-auto px-6 py-8 flex gap-8">
         {/* Left Sidebar - Always Expanded */}
-        <div className="w-72 flex-shrink-0">
-          <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto">
+        <div className="w-60 flex-shrink-0">
+          <div className="bg-white rounded-lg shadow-lg p-4 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto">
             <h3 className="font-bold text-lg mb-4 text-gray-800">Filters</h3>
             
             {/* Client Filter Section */}
@@ -393,7 +396,7 @@ const CataloguePage = () => {
               Gen AI / Agentic AI Asset Catalogue
             </h2>
             <p className="text-gray-600">
-              <span className="font-semibold">{filteredVideos.length}</span> assets found
+              <span className="font-semibold">{filteredVideos.length}</span> demos found
             </p>
           </div>
 
