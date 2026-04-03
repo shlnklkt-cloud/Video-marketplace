@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home, Search, X, ArrowUpDown } from 'lucide-react';
+import { Home, Search, X, ArrowUpDown, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -18,8 +18,31 @@ const CataloguePage = () => {
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [selectedClients, setSelectedClients] = useState([]);
   const [sortOption, setSortOption] = useState('');
   const [loading, setLoading] = useState(true);
+
+  // Extract unique clients with logos from all videos
+  const uniqueClients = useMemo(() => {
+    const clientMap = new Map();
+    
+    videos.forEach((video) => {
+      if (video.target_companies && video.company_logos) {
+        video.target_companies.forEach((company, index) => {
+          const logo = video.company_logos[index];
+          // Only add clients that have logos and aren't already in the map
+          if (logo && !clientMap.has(company)) {
+            clientMap.set(company, logo);
+          }
+        });
+      }
+    });
+    
+    // Convert to array and sort alphabetically
+    return Array.from(clientMap.entries())
+      .map(([name, logo]) => ({ name, logo }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [videos]);
 
   useEffect(() => {
     seedAndFetchData();
@@ -29,7 +52,7 @@ const CataloguePage = () => {
   useEffect(() => {
     applyFilters();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videos, selectedFilters, searchQuery, sortOption]);
+  }, [videos, selectedFilters, selectedClients, searchQuery, sortOption]);
 
   const seedAndFetchData = async () => {
     try {
@@ -72,6 +95,16 @@ const CataloguePage = () => {
           const [category, lob] = filter.split('_');
           return video.category === category && (!lob || video.line_of_business === lob);
         });
+      });
+    }
+
+    // Apply client filter
+    if (selectedClients.length > 0) {
+      filtered = filtered.filter((video) => {
+        if (!video.target_companies) return false;
+        return selectedClients.some((client) => 
+          video.target_companies.includes(client)
+        );
       });
     }
 
@@ -133,8 +166,19 @@ const CataloguePage = () => {
     });
   };
 
+  const toggleClientFilter = (clientName) => {
+    setSelectedClients((prev) => {
+      if (prev.includes(clientName)) {
+        return prev.filter((c) => c !== clientName);
+      } else {
+        return [...prev, clientName];
+      }
+    });
+  };
+
   const clearAllFilters = () => {
     setSelectedFilters({});
+    setSelectedClients([]);
     setSearchQuery('');
   };
 
@@ -148,7 +192,8 @@ const CataloguePage = () => {
   };
 
   const getTotalActiveFilters = () => {
-    return Object.values(selectedFilters).filter(Boolean).length;
+    const categoryFilters = Object.values(selectedFilters).filter(Boolean).length;
+    return categoryFilters + selectedClients.length;
   };
 
   if (loading) {
@@ -196,6 +241,43 @@ const CataloguePage = () => {
           <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24 max-h-[calc(100vh-7rem)] overflow-y-auto">
             <h3 className="font-bold text-lg mb-4 text-gray-800">Filters</h3>
             
+            {/* Client Filter Section */}
+            <div className="mb-6 pb-6 border-b">
+              <div className="flex items-center gap-2 mb-4">
+                <Building2 className="h-5 w-5 text-purple-600" />
+                <h4 className="font-semibold text-gray-700">Filter by Client</h4>
+                {selectedClients.length > 0 && (
+                  <Badge className="bg-purple-600 ml-auto">{selectedClients.length}</Badge>
+                )}
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {uniqueClients.map((client) => {
+                  const isSelected = selectedClients.includes(client.name);
+                  return (
+                    <button
+                      key={client.name}
+                      onClick={() => toggleClientFilter(client.name)}
+                      className={`p-2 rounded-lg border-2 transition-all duration-200 hover:shadow-md ${
+                        isSelected
+                          ? 'border-purple-500 bg-purple-50 shadow-md'
+                          : 'border-gray-200 bg-white hover:border-purple-300'
+                      }`}
+                      title={client.name}
+                      data-testid={`client-filter-${client.name.replace(/\s+/g, '-').toLowerCase()}`}
+                    >
+                      <div className="h-10 flex items-center justify-center">
+                        <img
+                          src={client.logo}
+                          alt={client.name}
+                          className="max-h-8 max-w-full object-contain"
+                        />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Categories */}
             <div className="space-y-4">
               {categories.map((category) => {
